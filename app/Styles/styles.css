@@ -3,6 +3,7 @@
 
 /* General Styles */
 body {
+	padding-top: 60px;
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #000; /* Light brown/nude background */
@@ -11,10 +12,14 @@ body {
 
 /* Navbar Styles */
 .navbar {
+	position: fixed;
+	top: 0;
+    width: 97%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
+	z-index: 1000;
     background-color: #000; /* Black navbar background */
     color: #fff; /* White text color */
 }
@@ -33,6 +38,19 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-left: 20px; /* Add some space between the logo and the name */
+}
+
+.store-name a {
+    color: #af9d34; /* Gold color for the link */
+    text-decoration: none; /* No underline for the link */
+}
+
+.store-name a:hover {
+    color: #fff; /* White text color on hover */
+}
+
+.store-name a:visited {
+    color: #af9d34; /* Ensures the gold color remains after clicking */
 }
 
 .nav-links {
@@ -412,4 +430,16 @@ footer {
 
 .dropdown a:hover {
     background-color: #f1f1f1;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+.product-cards, .product-slider, .reviews {
+    margin-bottom: 50px;
+}
+.product-card img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }

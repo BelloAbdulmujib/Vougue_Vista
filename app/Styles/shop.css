@@ -25,9 +25,16 @@ header {
 }
 
 .navbar {
+    position: fixed;
+	top: 0;
+    width: 97%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+	z-index: 1000;
+    background-color: #000; /* Black navbar background */
+    color: #fff; /* White text color */
 }
 
 .navbar .logo img {
