@@ -1,0 +1,34 @@
+from flask import Flask
+from flask_mail import Mail
+from config import Config
+
+from extensions import db, login
+from app import models
+
+from app.routes.auth import auth_bp
+from app.routes.shop import shop_bp
+from app.routes.payment import payment_bp
+from app.routes.admin import admin_bp
+from app.routes.landing import landing_bp
+
+app = Flask(__name__)
+
+def create_app(config_class='config.Config'):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    db.init_app(app)
+    login.init_app(app)
+
+        # This import the routes and models
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(shop_bp)
+    app.register_blueprint(payment_bp)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(landing_bp)
+    
+
+    with app.app_context():
+        db.create_all() 
+
+    return app
