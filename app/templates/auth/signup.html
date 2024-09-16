@@ -21,12 +21,21 @@
 
                 <label for="username">Username:</label>
                 {{ form.username(class="form-control", id="username") }}
+                {% if form.username.errors %}
+                    <span class="error">{{ form.username.errors[0] }}</span>
+                {% endif %}
 
                 <label for="email">Email:</label>
                 {{ form.email(class="form-control", id="email") }}
+                {% if form.username.errors %}
+                    <span class="error">{{ form.email.errors[0] }}</span>
+                {% endif %}
 
                 <label for="password">Password:</label>
                 {{ form.password(class="form-control", id="password") }}
+                {% if form.username.errors %}
+                    <span class="error">{{ form.password.errors[0] }}</span>
+                {% endif %}
 
                 <button type="submit">Sign Up</button>
             </form>

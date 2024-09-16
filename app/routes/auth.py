@@ -3,65 +3,87 @@ from app import db
 from flask_login import login_user, logout_user
 from app.form import LoginForm, SignupForm
 from app.models import User, Admin
-import uuid
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 auth_bp = Blueprint('auth', __name__)
 
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    """handles the user and admin login"""
+    """Handles the login for both users and admins."""
     form = LoginForm()
+    
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        
+        email = request.form.get('login-email')
+        password = request.form.get('login-password')
+
+        # Check if the email exists in the User or Admin table
         user = User.query.filter_by(email=email).first()
         admin = Admin.query.filter_by(email=email).first()
-        
+
+        # If the user exists and the password is correct
         if user and user.check_password(password):
             login_user(user)
-            return jsonify({"message": "User logged in successfully!"})
+            flash('User logged in successfully!', 'success')
+            return redirect(url_for('home'))  #
+
+        # If the admin exists and the password is correct
         elif admin and admin.check_password(password):
             login_user(admin)
-            return redirect(url_for('admin_dashboard'))  # Redirect to the admin dashboard
+            flash('Admin logged in successfully!', 'success')
+            return redirect(url_for('admin'))  # Redirect to admin dashboard
+        
+        # If the credentials are incorrect
         else:
-            flash("Invalid email or password", 'danger')
+            flash('Invalid email or password', 'danger')
             return redirect(url_for('auth.login'))
-    
-    return render_template('auth/login.html', title='Login', form=form)  # Render the login form if it's a GET request
+
+    # Render the login page if it's a GET request or after an invalid POST request
+    return render_template('auth/login.html', title='Login', form=form)
 
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     """Handles the signup form for a new user"""
     form = SignupForm()
+    
     if form.validate_on_submit():
-        print("Form validated and submitted")
-
         # Extract form data correctly using form object
         email = form.email.data
         password = form.password.data
         username = form.username.data
 
-
-        # Check if user already exists
+        # Checks if the user already exists
         if User.query.filter_by(email=email).first():
-            flash("User already exists", "error")
+            flash("User with this email already exists", "error")
             return redirect(url_for('auth.signup')), 400
 
+        # Hash the password (This ensures hash_password is working as expected)
+        hashed_password = hash_password(password)
         
-        # Create a new user and save to the database
-        user = User(username=form.username.data, email=email, password=hash_password(password))  # Assuming `hash_password` hashes the password
+        # Create a new user object and save it to the database
+        user = User(username=username, email=email, password=hashed_password)
 
-        db.session.add(user)
-        db.session.commit()
-        flash('Account created successfully!', 'success')
-        return redirect(url_for('auth.login'))
-
+        try:
+            db.session.add(user)
+            db.session.commit()
+            flash('Account created successfully!', 'success')
+            return redirect(url_for('auth.login'))
+        
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            flash('An error occurred while creating the account. Please try again.', 'danger')
+            print(f"Error creating user: {e}")  # Log the error for debugging
+            return redirect(url_for('auth.signup')), 500
+    
+    # If there are form validation errors
     if form.errors:
         print("Form validation errors:", form.errors)
+        flash('Please correct the errors in the form.', 'danger')
 
-    return render_template('auth/signup.html', title='Signup', form=form)  # Pass form object, not string
+    # Render the signup page with the form
+    return render_template('auth/signup.html', title='Signup', form=form)
 
 
 @auth_bp.route('/logout')

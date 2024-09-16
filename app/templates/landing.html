@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Vougue Vista</title>
     <link rel="stylesheet" href="{{ url_for ('static', filename='styles/landing.css')}}"/>
-	<link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="{{ url_for ('static', filename='assets/favicon.ico')}}" type="image/x-icon">
 </head>
 <body>
     <header>
@@ -17,8 +17,8 @@
 				Vougue Vista
 			</div>
             <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="{{ url_for('landing.home') }}">Home</a></li>
+                <li><a href="{{ url_for('shop.products') }}">Shop</a></li>
                 <li><a href="#about-us">About Us</a></li>
             </ul>
             <div class="nav-right">
