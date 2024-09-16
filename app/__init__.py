@@ -10,15 +10,18 @@ from app.routes.shop import shop_bp
 from app.routes.payment import payment_bp
 from app.routes.admin import admin_bp
 from app.routes.landing import landing_bp
+from flask_wtf.csrf import CSRFProtect
+
 
 app = Flask(__name__)
 
 def create_app(config_class='config.Config'):
     app = Flask(__name__)
     app.config.from_object(config_class)
-
+    # app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'static/uploads')  # The folder where the uploads will be saved
     db.init_app(app)
     login.init_app(app)
+
 
         # This import the routes and models
     app.register_blueprint(auth_bp)

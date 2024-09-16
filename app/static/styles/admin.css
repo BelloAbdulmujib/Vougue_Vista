@@ -1,0 +1,168 @@
+/* Global styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text for contrast */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1a1a1a; /* Slightly lighter black */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Gold shadow effect */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Logo section */
+.logo {
+    flex: 0 0 200px; /* Set fixed size for the logo container */
+    text-align: right;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+    display: inline-block;
+}
+
+/* Heading styles */
+h1 {
+    color: #ffd700; /* Gold color */
+    text-align: left;
+    font-size: 2em;
+}
+
+/* Flex layout for form and product list */
+.form-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Form styling */
+form {
+    width: 100%;
+    max-width: 400px; /* Fixed max-width for the form */
+    margin-bottom: 40px;
+    padding: 15px;
+    background-color: #111; /* Slightly lighter black */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #333; /* Dark grey */
+    border: 1px solid #555; /* Lighter grey */
+    border-radius: 5px;
+    color: #fff;
+}
+
+textarea {
+    height: 100px;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #ffd700; /* Gold for submit */
+    color: #000; /* Black text for contrast */
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffdd33; /* Lighter gold on hover */
+}
+
+button[type="submit"]:active {
+    background-color: #ccac00; /* Darker gold on active */
+}
+
+/* Remove button */
+form[style*="display:inline;"] button {
+    background-color: #ff1a1a; /* Red color for delete */
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+form[style*="display:inline;"] button:hover {
+    background-color: #cc0000; /* Darker red on hover */
+}
+
+/* Products list */
+.product-list {
+    flex: 1;
+    width: 100%;
+    margin-top: 30px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 15px 10px;
+    border-bottom: 1px solid #333; /* Grey line between products */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li strong {
+    font-weight: bold;
+    color: #ffd700; /* Gold for product names */
+}
+
+li form {
+    margin-left: 15px;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666; /* Lighter grey */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .logo {
+        text-align: center;
+        margin-top: 20px;
+    }
+}

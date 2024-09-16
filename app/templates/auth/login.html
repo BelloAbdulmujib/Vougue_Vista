@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Vougue Vista</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/landing.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon">
+    <!--script defer src="{{ url_for('static', filename='js/toggleForms.js') }}"></script> --> 
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Vougue Vista Logo">
+            <h1>Welcome to Vougue Vista</h1>
+            <p id="form-message">Type your email or phone number and password to log in or create a Vougue account.</p>
+
+            <!-- Login Form -->
+            <form id="login-form" action="{{ url_for('auth.login') }}" method="post">
+                {{ form.hidden_tag() }} <!-- CSRF token -->
+
+                <label for="email">Email or Phone Number:</label>
+                {{ form.email(class="form-control", id="email") }}
+
+                <label for="password">Password:</label>
+                {{ form.password(class="form-control", id="password") }}
+
+                <button type="submit">Login</button>
+            </form>
+
+            <!-- Toggle between Login/Signup -->
+            <div class="toggle-link">
+                <p id="toggle-text">Don't have an account? <a href="{{ url_for('auth.signup') }}" id="toggle-link">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

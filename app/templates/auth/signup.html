@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Vougue Vista</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/landing.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Vougue Vista Logo">
+            <h1>Welcome to Vougue Vista</h1>
+            <p id="form-message">Fill in the details below to create your Vougue account.</p>
+
+            <!-- Signup Form -->
+            <form id="signup-form" action="{{ url_for('auth.signup') }}" method="post">
+                {{ form.hidden_tag() }} <!-- CSRF token -->
+
+                <label for="username">Username:</label>
+                {{ form.username(class="form-control", id="username") }}
+
+                <label for="email">Email:</label>
+                {{ form.email(class="form-control", id="email") }}
+
+                <label for="password">Password:</label>
+                {{ form.password(class="form-control", id="password") }}
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

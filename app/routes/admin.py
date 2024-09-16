@@ -2,6 +2,7 @@ from flask import Flask, Blueprint, render_template, request, url_for, redirect,
 from flask_sqlalchemy import SQLAlchemy
 import os
 
+app = Flask(__name__)
 
 admin_bp = Blueprint('admin', __name__)
 

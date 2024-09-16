@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Vougue Vista</title>
-    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="{{ url_for ('static', filename='styles/landing.css')}}"/>
 	<link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="../assets/logo.png" alt="Vougue Vista Logo">
+                <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Vougue Vista Logo">
             </div>
 			<div class="store-name">
 				Vougue Vista
@@ -27,11 +27,11 @@
                     <button type="submit">Search</button>
                 </div>
                 <div class="account">
-                    <a href="account.html">Account</a>
+                    <a href="/login">Account</a>
                 </div>
                 <div class="cart">
                     <a href="cart.html">
-                        <img src="../assets/cart-icon.png" alt="Cart">
+                        <img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart">
                         <span>Cart</span>
                     </a>
                 </div>
@@ -51,43 +51,43 @@
     <h2>New Arrivals!</h2>
     <div class="cards-container">
         <div class="product-card">
-            <img src="../assets/images/background/cardimage1.jpg" alt="Product 1">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage1.jpg') }}" alt="Product 1">
             <div class="card-caption">Elegant Blue Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/Background/cardimage2.jpg" alt="Product 2">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage2.jpg') }}" alt="Product 2">
             <div class="card-caption">Elegant Biege Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage3.jpg" alt="Product 3">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage3.jpg') }}" alt="Product 3">
             <div class="card-caption">Nude Blazer</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage4.jpg" alt="Product 4">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage4.jpg') }}" alt="Product 4">
             <div class="card-caption">Men's Stylish Watch</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage5.jpg" alt="Product 5">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage5.jpg') }}" alt="Product 5">
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage6.jpg" alt="Product 6">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage6.jpg') }}" alt="Product 6">
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage7.jpg" alt="Product 7">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage7.jpg') }}" alt="Product 7">
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage8.jpg" alt="Product 8">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage8.jpg') }}" alt="Product 8">
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage9.jpg" alt="Product 9">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage9.jpg') }}" alt="Product 9">
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
         <div class="product-card">
-            <img src="../assets/images/background/cardimage10.jpg" alt="Product 10">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage10.jpg') }}" alt="Product 10">
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
     </div>
@@ -99,24 +99,24 @@
     <h2>Featured Products</h2>
     <div class="slider-container">
         <div class="slide">
-            <img src="../assets/images/Background/cardimage1.jpg" alt="Product 1">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage1.jpg') }}" alt="Product 1">
         </div>
         <div class="slide">
-            <img src="../assets/images/Background/cardimage2.jpg" alt="Product 2">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage2.jpg') }}" alt="Product 2">
         </div>
         <div class="slide">
-            <img src="../assets/images/Background/cardimage3.jpg" alt="Product 3">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage3.jpg') }}" alt="Product 3">
         </div>
         <div class="slide">
-            <img src="../assets/images/Background/cardimage4.jpg" alt="Product 4">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage4.jpg') }}" alt="Product 4">
         </div>
         <div class="slide">
-            <img src="../assets/images/Background/cardimage5.jpg" alt="Product 5">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage5.jpg') }}" alt="Product 5">
         <div class="slide">
-            <img src="../assets/images/Background/cardimage6.jpg" alt="Product 6">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage6.jpg') }}" alt="Product 6">
         </div>
         <div class="slide">
-            <img src="../assets/images/Background/cardimage7.jpg" alt="Product 7">
+            <img src="{{ url_for('static', filename='assets/images/Background/cardimage7.jpg') }}" alt="Product 7">
         </div>
     </div>
 </section>
