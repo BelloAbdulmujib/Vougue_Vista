@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+grom flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError, Email, Length
 from app.models import User
@@ -21,7 +21,8 @@ class SignupForm(FlaskForm):
     def validate_email(self, email):
         """ email validation before signup """
         email = User.query.filter_by(email=email.data).first()
-        if User is not None:
+
+        if email is not None:
             raise ValidationError('Email already exist, please use a different email address.')
 
 class Product(FlaskForm):
@@ -30,6 +31,3 @@ class Product(FlaskForm):
     description = StringField('Description', validators=[DataRequired()])
     price = StringField('Price', validators=[DataRequired()])
     quantity = StringField('Quantity', validators=[DataRequired()])
-    
-    # password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('Password')])
-    submit = SubmitField('Signup')

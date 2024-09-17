@@ -19,11 +19,15 @@ class User(db.Model):
     def check_password(self, password):
         return check_password(strong_password, password)
 
-    def get_user_id():
+    def get_id(self):
         return str(self.id)
 
     def __repr__(self):
         return f'<User {self.username}>'
+    
+    def is_active(self):
+        """Override is_active for Flask-Login."""
+        return self.active
 
 # Defines the admin model
 class Admin(db.Model):

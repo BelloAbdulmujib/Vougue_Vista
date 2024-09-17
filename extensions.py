@@ -8,4 +8,5 @@ login = LoginManager()
 @login.user_loader
 def user_loader(user_id):
     """ This function loads the user from the database """
+    from app.models import User
     return User.query.get(int(user_id))
