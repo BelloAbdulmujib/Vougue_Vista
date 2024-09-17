@@ -11,4 +11,4 @@ class Config:
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'VogueVista.db')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///VogueVista.sqlite3'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    UPLOAD_FOLDER = 'static/uploads'
+    UPLOAD_FOLDER = 'uploads'

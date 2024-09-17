@@ -23,3 +23,13 @@ class SignupForm(FlaskForm):
         email = User.query.filter_by(email=email.data).first()
         if User is not None:
             raise ValidationError('Email already exist, please use a different email address.')
+
+class Product(FlaskForm):
+    """ Handles the signup form detail """
+    product_name = StringField('Product_name', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    price = StringField('Price', validators=[DataRequired()])
+    quantity = StringField('Quantity', validators=[DataRequired()])
+    
+    # password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('Password')])
+    submit = SubmitField('Signup')
