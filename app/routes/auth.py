@@ -14,7 +14,7 @@ def login():
     print("in the login route")
     """Handles the login for both users and admins."""
     form = LoginForm()
-    
+    #if form.validate_on_submit():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -28,8 +28,9 @@ def login():
         # If the user exists and the password is correct
         if user and check_password_hash(user.password, password):
             login_user(user)
+            print('user logged in successfuly')
             flash('User logged in successfully!', 'success')
-            return redirect(url_for('landing.home'))  #
+            return redirect(url_for('home'))  #
 
         # If the admin exists and the password is correct
         # elif admin and admin.check_password(password):
