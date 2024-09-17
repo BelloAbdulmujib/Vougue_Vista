@@ -11,33 +11,36 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    print("in the login route")
     """Handles the login for both users and admins."""
     form = LoginForm()
     
     if request.method == 'POST':
-        email = request.form.get('login-email')
-        password = request.form.get('login-password')
+        email = request.form.get('email')
+        password = request.form.get('password')
 
         # Check if the email exists in the User or Admin table
         user = User.query.filter_by(email=email).first()
-        admin = Admin.query.filter_by(email=email).first()
+        
+        # uncomment later
+        # admin = Admin.query.filter_by(email=email).first()
 
         # If the user exists and the password is correct
-        if user and user.check_password(password):
+        if user and check_password_hash(user.password, password):
             login_user(user)
             flash('User logged in successfully!', 'success')
-            return redirect(url_for('home'))  #
+            return redirect(url_for('landing.home'))  #
 
         # If the admin exists and the password is correct
-        elif admin and admin.check_password(password):
-            login_user(admin)
-            flash('Admin logged in successfully!', 'success')
-            return redirect(url_for('admin'))  # Redirect to admin dashboard
+        # elif admin and admin.check_password(password):
+        #     login_user(admin)
+        #     flash('Admin logged in successfully!', 'success')
+        #     return redirect(url_for('admin'))  # Redirect to admin dashboard
         
-        # If the credentials are incorrect
-        else:
-            flash('Invalid email or password', 'danger')
-            return redirect(url_for('auth.login'))
+        # # If the credentials are incorrect
+        # else:
+        #     flash('Invalid email or password', 'danger')
+        #     return redirect(url_for('auth.login'))
 
     # Render the login page if it's a GET request or after an invalid POST request
     return render_template('auth/login.html', title='Login', form=form)
@@ -60,7 +63,7 @@ def signup():
             return redirect(url_for('auth.signup')), 400
 
         # Hash the password (This ensures hash_password is working as expected)
-        hashed_password = hash_password(password)
+        hashed_password = generate_password_hash(password)
         
         # Create a new user object and save it to the database
         user = User(username=username, email=email, password=hashed_password)
