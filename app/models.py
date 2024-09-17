@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from extensions import db
 from sqlalchemy import Column, String, Float
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # Defines the user's model
@@ -14,10 +15,10 @@ class User(db.Model):
 
 
     def set_password(self, password):
-        self.strong_password = generate_password_hash(password)
+        self.password = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password(strong_password, password)
+        return check_password_hash(self.password, password)
 
     def get_id(self):
         return str(self.id)
