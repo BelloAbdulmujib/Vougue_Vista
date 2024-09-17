@@ -1,0 +1,8 @@
+flask_sqlalchemy
+flask_mail
+pytest
+flask
+flask_login
+flask_wtf
+paypalrestsdk
+stripe
