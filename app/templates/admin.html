@@ -1,42 +1,53 @@
+<!-- admin.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Vougue Vista</title>
-    <link rel="stylesheet" href="../styles/styles.css">
-	<link rel="stylesheet" href="../styles/admin.css">
-	<link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <title>Admin Dashboad - Vougue Vista</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/admin.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon">
+    <style>
+        /* CSS styling will be here */
+    </style>
 </head>
 <body>
-    <div class="admin-container">
-        <header class="admin-header">
-            <h1>Admin Dashboard</h1>
-            <nav>
-                <ul>
-                    <li><a href="#products">Manage Products</a></li>
-                    <li><a href="#orders">Manage Orders</a></li>
-                    <li><a href="#users">Manage Users</a></li>
-                    <li><a href="#reports">View Reports</a></li>
-                </ul>
-            </nav>
-        </header>
-        <section id="products" class="admin-section">
-            <h2>Manage Products</h2>
-            <!-- Add functionality for adding, updating, and deleting products -->
-        </section>
-        <section id="orders" class="admin-section">
-            <h2>Manage Orders</h2>
-            <!-- Add functionality for managing customer orders -->
-        </section>
-        <section id="users" class="admin-section">
-            <h2>Manage Users</h2>
-            <!-- Add functionality for viewing and managing registered users -->
-        </section>
-        <section id="reports" class="admin-section">
-            <h2>View Reports</h2>
-            <!-- Add functionality for viewing sales, inventory, and other reports -->
-        </section>
+    <div class="container">
+        <h1>Admin Page - Manage Products</h1>
+        <form action="/admin/add_product" method="POST" enctype="multipart/form-data">
+            <label for="product_name">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" required>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="image">Product Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required>
+
+            <button type="submit">Add Product</button>
+        </form>
+
+        <h2>Current Products</h2>
+        <ul>
+            {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
+                <form action="/admin/remove_product/{{ product.id }}" method="POST" style="display:inline;">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Logo">
     </div>
 </body>
 </html>

@@ -1,0 +1,39 @@
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Vougue Vista</title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='styles/product.css')}}"/>
+	<link rel="icon" href="{{ url_for ('static', filename='assets/favicon.ico')}}" type="image/x-icon">
+    <title>Product Catalog</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Catalog</h1>
+        <ul>
+            {% for product in products %}
+            <li>
+                <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" width="100">
+                <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
+                <form action="/add_to_cart/{{ product.id }}" method="POST">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Your Cart</h2>
+        <ul>
+            {% for item in cart %}
+            <li>{{ item.name }} - ${{ item.price }}</li>
+            {% endfor %}
+        </ul>
+
+        <form action="/checkout" method="POST">
+            <button type="submit">Checkout</button>
+        </form>
+    </div>
+</body>
+</html>

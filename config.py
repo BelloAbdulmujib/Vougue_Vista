@@ -9,9 +9,9 @@ app = Flask(__name__)
 class Config:
     SECRET_KEY = 'your secretkey'
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'VogueVista.db')
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///VogueVista.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///VogueVista.sqlite3'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    UPLOAD_FOLDER = 'static/uploads'
+    UPLOAD_FOLDER = 'uploads'
 
 # Configuration for testing environment
 class TestConfig(Config):
@@ -19,3 +19,4 @@ class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # In-memory database for faster tests
     WTF_CSRF_ENABLED = False  # Disable CSRF for testing forms
     DEBUG = True
+

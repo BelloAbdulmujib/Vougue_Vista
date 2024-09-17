@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | Vougue Vista</title>
-    <link rel="stylesheet" href="../styles/shop.css">
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/shop.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <a id="top"></a>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="../assets/logo.png" alt="Vougue Vista Logo">
+                <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Vougue Vista Logo">
             </div>
             <div class="store-name">Vougue Vista</div>
             <ul class="nav-links">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="{{ url_for('landing.home') }}">Home</a></li>
+                <li><a href="{{ url_for('shop.products') }}">Shop</a></li>
                 <li><a href="#about-us">About Us</a></li>
             </ul>
             <div class="nav-right">
@@ -27,11 +27,11 @@
                     <button type="submit">Search</button>
                 </div>
                 <div class="account">
-                    <a href="account.html">Account</a>
+                    <a href="/login">Account</a>
                 </div>
                 <div class="cart">
-                    <a href="cart.html">
-                        <img src="../assets/cart-icon.png" alt="Cart">
+                    <a href="{{ url_for('shop.add_to_cart') }}">
+                        <img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart">
                         <span>Cart</span>
                     </a>
                 </div>
@@ -50,151 +50,201 @@
 
         <section id="male-section" class="product-grid">
             <div class="product-card">
-                <img src="../assets/images/male/male1.jpg" alt="Male Product 1">
+                <img src="{{ url_for('static', filename='assets/images/male/male1.jpg') }}" alt="Male Product 1">
                 <h4>Black Brouges</h4>
                 <p>#50,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male2.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male2.jpg') }}" alt="Male Product 2">
                 <h4>White Sneakers</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male3.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male3.jpg') }}" alt="Male Product 2">
                 <h4>Beach Shirt</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male4.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male4.jpg') }}" alt="Male Product 2">
                 <h4>Black Hoodie</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male5.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male5.jpg') }}" alt="Male Product 2">
                 <h4>White Polo</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male6.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male6.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male7.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male7.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male8.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male8.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male9.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male9.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male10.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male10.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male11.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male11.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/male/male12.jpg" alt="Male Product 2">
+                <img src="{{ url_for('static', filename='assets/images/male/male12.jpg') }}" alt="Male Product 2">
                 <h4>Black Jeans</h4>
                 <p>#85,000</p>
                 <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="container">
+                <h1>Product Catalog</h1>
+                <ul>
+                    {% for product in products %}
+                    <li>
+                        <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" width="100">
+                        <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
+                        <form action="/add_to_cart/{{ product.id }}" method="POST">
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+        
+                <h2>Your Cart</h2>
+                <ul>
+                    {% for item in cart %}
+                    <li>{{ item.name }} - ${{ item.price }}</li>
+                    {% endfor %}
+                </ul>
+        
+                <form action="/checkout" method="POST">
+                    <button type="submit">Checkout</button>
+                </form>
             </div>
         </section>
 
         <section id="female-section" class="product-grid">
             <div class="product-card">
-                <img src="../assets/images/female/female1.jpg" alt="Blue Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female1.jpg') }}" alt="Blue Dress">
                 <h4>Black Sil Shirt</h4>
                 <p>#20,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female2.jpg" alt="Demin Pant">
+                <img src="{{ url_for('static', filename='assets/images/female/female2.jpg') }}" alt="Demin Pant">
                 <h4>Black Loafers</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female3.jpg" alt="Orange Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female3.jpg') }}" alt="Orange Dress">
                 <h4>Pink Crop Top</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female4.jpg" alt="Blazer Jacket">
+                <img src="{{ url_for('static', filename='assets/images/female/female4.jpg') }}" alt="Blazer Jacket">
                 <h4>Pink Two-Piece Set</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female5.jpg" alt="Maroon Jacket">
+                <img src="{{ url_for('static', filename='assets/images/female/female5.jpg') }}" alt="Maroon Jacket">
                 <h4>White Sneakers</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female6.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female6.jpg') }}" alt="Floral Dress">
                 <h4>Biege Dress</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female7.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female7.jpg') }}" alt="Floral Dress">
                 <h4>White Dress</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female8.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female8.jpg') }}" alt="Floral Dress">
                 <h4>Burgundy Dress</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female9.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female9.jpg') }}" alt="Floral Dress">
                 <h4>Blue Denim</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female10.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female10.jpg') }}" alt="Floral Dress">
                 <h4>Blac Two-Piece Set</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female11.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female11.jpg') }}" alt="Floral Dress">
                 <h4>Yellow Chiffon Blouse</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
             <div class="product-card">
-                <img src="../assets/images/female/female12.jpg" alt="Floral Dress">
+                <img src="{{ url_for('static', filename='assets/images/female/female12.jpg') }}" alt="Floral Dress">
                 <h4>Black Maxi Dress</h4>
                 <p>#80,000</p>
                 <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="container">
+                <h1>New Product Catalog</h1>
+                <ul>
+                    {% for product in products %}
+                    <li>
+                        <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" width="100">
+                        <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
+                        <form action="/add_to_cart/{{ product.id }}" method="POST">
+                            <button type="submit">Add to Cart</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+        
+                <h2>Your Cart</h2>
+                <ul>
+                    {% for item in cart %}
+                    <li>{{ item.name }} - ${{ item.price }}</li>
+                    {% endfor %}
+                </ul>
+        
+                <form action="/checkout" method="POST">
+                    <button type="submit">Checkout</button>
+                </form>
             </div>
         </section>
     </main>

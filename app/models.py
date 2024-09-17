@@ -20,11 +20,15 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def get_user_id():
+    def get_id(self):
         return str(self.id)
 
     def __repr__(self):
         return f'<User {self.username}>'
+    
+    def is_active(self):
+        """Override is_active for Flask-Login."""
+        return self.active
 
 # Defines the admin model
 class Admin(db.Model):
@@ -44,6 +48,7 @@ class Products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=0)
     image = db.Column(db.String(100), nullable=False)
        
@@ -57,6 +62,7 @@ class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     image = db.Column(db.String(100), nullable=False)
 

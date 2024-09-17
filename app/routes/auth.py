@@ -1,85 +1,94 @@
 from flask import Flask, Blueprint, request, jsonify, render_template, url_for, redirect, flash
-import re
 from app import db
 from flask_login import login_user, logout_user
 from app.form import LoginForm, SignupForm
 from app.models import User, Admin
-import uuid
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 auth_bp = Blueprint('auth', __name__)
-
-def strong_password(password):
-    # Regular expression to confirm strong password
-    import re
-    if (len(password) >= 8 and
-        re.search(r'[a-z]', password) and
-        re.search(r'[A-Z]', password) and
-        re.search(r'[0-9]', password) and
-        re.search(r'[@$!%*?&]', password)):
-        return True
-    return False
-    """pattern = re.compile(r"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")
-    return pattern.match(password) is not None"""
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    """handles the user and admin login"""
+    print("in the login route")
+    """Handles the login for both users and admins."""
     form = LoginForm()
+    #if form.validate_on_submit():
     if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        
-        user = User.query.filter_by(email=email).first()
-        admin = Admin.query.filter_by(email=email).first()
-        
-        if user and user.check_password(password):
-            login_user(user)
-            return jsonify({"message": "User logged in successfully!"})
-        elif admin and admin.check_password(password):
-            login_user(admin)
-            return redirect(url_for('admin_dashboard'))  # Redirect to the admin dashboard
-        else:
-            flash("Invalid email or password", 'danger')
-            return redirect(url_for('auth.login'))
-    
-    return render_template('auth/login.html', title='Login', user='user')  # Render the login form if it's a GET request
+        email = request.form.get('email')
+        password = request.form.get('password')
 
+        # Check if the email exists in the User or Admin table
+        user = User.query.filter_by(email=email).first()
+        
+        # uncomment later
+        # admin = Admin.query.filter_by(email=email).first()
+
+        # If the user exists and the password is correct
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            print('user logged in successfuly')
+            flash('User logged in successfully!', 'success')
+            return redirect(url_for('home'))  #
+
+        # If the admin exists and the password is correct
+        # elif admin and admin.check_password(password):
+        #     login_user(admin)
+        #     flash('Admin logged in successfully!', 'success')
+        #     return redirect(url_for('admin'))  # Redirect to admin dashboard
+        
+        # # If the credentials are incorrect
+        # else:
+        #     flash('Invalid email or password', 'danger')
+        #     return redirect(url_for('auth.login'))
+
+    # Render the login page if it's a GET request or after an invalid POST request
+    return render_template('auth/login.html', title='Login', form=form)
 
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
-    """ Handles the signup form for a new user"""
+    """Handles the signup form for a new user"""
     form = SignupForm()
+    
     if form.validate_on_submit():
-        # This will extract form data
-        email = request.form['email']
-        password = request.form['password']
+        # Extract form data correctly using form object
+        email = form.email.data
+        password = form.password.data
+        username = form.username.data
 
+        # Checks if the user already exists
         if User.query.filter_by(email=email).first():
-            flash("User already exists", "error")
+            flash("User with this email already exists", "error")
             return redirect(url_for('auth.signup')), 400
 
-        if not email or not password:
-            return jsonify({"message": "Email and password required"})
+        # Hash the password (This ensures hash_password is working as expected)
+        hashed_password = generate_password_hash(password)
+        
+        # Create a new user object and save it to the database
+        user = User(username=username, email=email, password=hashed_password)
 
-        """if User.query.filter_by(email=form.email.data).first():
-            return jsonify({"message": "User already exist"}), 400"""
+        try:
+            db.session.add(user)
+            db.session.commit()
+            flash('Account created successfully!', 'success')
+            return redirect(url_for('auth.login'))
+        
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            flash('An error occurred while creating the account. Please try again.', 'danger')
+            print(f"Error creating user: {e}")  # Log the error for debugging
+            return redirect(url_for('auth.signup')), 500
+    
+    # If there are form validation errors
+    if form.errors:
+        print("Form validation errors:", form.errors)
+        flash('Please correct the errors in the form.', 'danger')
 
-        if not strong_password(password):
-            flash("Password does not meet the requirements. It must contain at least an Upper and lower case, number, and one special character, and be at least 8 characters long."), 400
-            return redirect(url_for(auth.signup))
+    # Render the signup page with the form
+    return render_template('auth/signup.html', title='Signup', form=form)
 
-        # Proceed to create account if password meets requirement.
-        # Create new user and save details to the database
-        user = User(username=form.username.data, email=form.email.data, password=strong_password)
-
-        db.session.add(user)
-        db.session.commit()
-        flash('Account created Successfully!'), 201
-        return redirect(url_for('auth.login'))
-
-    return render_template('auth/signup.html', title='Signup', form='form')  # Render the signup form if it's a GET request
 
 @auth_bp.route('/logout')
 def logout():
