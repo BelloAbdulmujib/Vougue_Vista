@@ -17,13 +17,11 @@ def admin():
 @admin_bp.route('/admin/add_product', methods=['POST'])
 def add_product():
     """ Handles the route for updating/adding a product """
-    # baydre test
     product_dir = current_app.config['UPLOAD_FOLDER']
     if not os.path.exists(product_dir):
         os.makedir(product_dir)
     
     product_name = request.form['product_name']
-    print(product_name)
     price = request.form['price']
     description = request.form['description']
     quantity = request.form['quantity']
@@ -34,7 +32,7 @@ def add_product():
     if image:
         image_filename = image.filename
 
-    image.save(os.path.join(app.config['UPLOAD_FOLDER']. image_filename))
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], image_filename))
 
 # Creating instance for the new product
     new_product = Products(
