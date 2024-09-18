@@ -47,6 +47,7 @@ class Products(db.Model):
     """ New added/upload products in the database """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.Integer, nullable=False, default=0)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=0)

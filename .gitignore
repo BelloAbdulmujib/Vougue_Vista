@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 __pycache__/
 *__pycache__/
 pytest_cache
 *.pytest_cache
 venv/
+=======
+__pycache__
+.pytest_cache
+*.cpython*
+>>>>>>> 7bdfef8 (fixed the upload file issue)

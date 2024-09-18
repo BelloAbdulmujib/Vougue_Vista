@@ -1,5 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, url_for, redirect, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
+from app.models import Products
+from app import db
 import os
 
 app = Flask(__name__)
@@ -15,10 +17,9 @@ def admin():
 @admin_bp.route('/admin/add_product', methods=['POST'])
 def add_product():
     """ Handles the route for updating/adding a product """
-    # baydre test
     product_dir = current_app.config['UPLOAD_FOLDER']
     if not os.path.exists(product_dir):
-        os.makedir(product_dir)
+        os.makedirs(product_dir)
     
     product_name = request.form['product_name']
     price = request.form['price']
@@ -29,12 +30,12 @@ def add_product():
 
     image = request.files['image']
     if image:
-        filename = image.filename
-        # image.save(os.path.join(app.config['UPLOAD_FOLDER']. filename))
-        product_path = os.path.join(product_dir, filename)
+        image_filename = image.filename
+
+    image.save(os.path.join(product_dir, image_filename))
 
 # Creating instance for the new product
-    new_product = Product(
+    new_product = Products(
         name=product_name,
         price=price,
         description=description,
@@ -47,7 +48,7 @@ def add_product():
     db.session.commit()
 
     flash('product added successfully!', 'success')
-    return redirect(url_for('admin'))
+    return redirect(url_for('admin.admin'))
 
 
 @admin_bp.route('/admin/remove_product/<int:product_id>', methods=['POST'])
