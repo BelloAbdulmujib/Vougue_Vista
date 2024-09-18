@@ -15,7 +15,6 @@ cryptography==2.8
 dbus-python==1.2.16
 decorator==4.4.2
 distro==1.4.0
-distro-info==0.23+ubuntu1.1
 dnspython==2.6.1
 email-validator==2.1.1
 entrypoints==0.3
