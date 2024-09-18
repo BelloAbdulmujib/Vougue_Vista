@@ -49,71 +49,31 @@
         </aside>
 
         <section id="male-section" class="product-grid">
+            {% for product in products %}
             <div class="product-card">
-                <img src="{{ url_for('static', filename='assets/images/male/male1.jpg') }}" alt="Male Product 1">
-                <h4>Black Brouges</h4>
-                <p>#50,000</p>
-                <button class="add-to-cart">Add to Cart</button>
-            </div>
-            <div class="container">
-                <h1>Product Catalog</h1>
-                <ul>
-                    {% for product in products %}
-                    <li>
-                        <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" width="100">
-                        <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
-                        <form action="/add_to_cart/{{ product.id }}" method="POST">
-                            <button type="submit">Add to Cart</button>
-                        </form>
-                    </li>
-                    {% endfor %}
-                </ul>
-        
-                <h2>Your Cart</h2>
-                <ul>
-                    {% for item in cart %}
-                    <li>{{ item.name }} - ${{ item.price }}</li>
-                    {% endfor %}
-                </ul>
-        
-                <form action="/checkout" method="POST">
-                    <button type="submit">Checkout</button>
+                <form>
+                    <img src="{{ url_for('static', filename='assets/images/male/male1.jpg') }}" alt="Male Product 1">
+                    <h4>Black Brouges</h4>
+                    <p>#50,000</p>
+                    <!-- Hidden inputs to pass product details -->
+                    <input type="hidden" name="product_id" value="1">
+                    <input type="hidden" name="product_name" value="Black Brouges">
+                    <input type="hidden" name="price" value="50000">
+                    <button class="add-to-cart">Add to Cart</button>
                 </form>
             </div>
+            {% endfor %}
         </section>
 
         <section id="female-section" class="product-grid">
+            {% for product in products %}
             <div class="product-card">
                 <img src="{{ url_for('static', filename='assets/images/female/female1.jpg') }}" alt="Blue Dress">
                 <h4>Black Sil Shirt</h4>
                 <p>#20,000</p>
                 <button class="add-to-cart">Add to Cart</button>
             </div>
-            <div class="container">
-                <h1>New Product Catalog</h1>
-                <ul>
-                    {% for product in products %}
-                    <li>
-                        <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" width="100">
-                        <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
-                        <form action="/add_to_cart/{{ product.id }}" method="POST">
-                            <button type="submit">Add to Cart</button>
-                        </form>
-                    </li>
-                    {% endfor %}
-                </ul>
-        
-                <h2>Your Cart</h2>
-                <ul>
-                    {% for item in cart %}
-                    <li>{{ item.name }} - ${{ item.price }}</li>
-                    {% endfor %}
-                </ul>
-        
-                <form action="/checkout" method="POST">
-                    <button type="submit">Checkout</button>
-                </form>
-            </div>
+            {% endfor %}
         </section>
     </main>
 
