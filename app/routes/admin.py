@@ -47,7 +47,7 @@ def add_product():
     db.session.add(new_product)
     db.session.commit()
 
-    flash('product added successfully!', 'success')
+    print('product added successfully!')
     return redirect(url_for('admin.admin'))
 
 
