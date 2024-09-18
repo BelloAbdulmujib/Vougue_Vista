@@ -1,5 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, url_for, redirect, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
+from app.models import Products
+from app import db
 import os
 
 app = Flask(__name__)
@@ -21,6 +23,7 @@ def add_product():
         os.makedir(product_dir)
     
     product_name = request.form['product_name']
+    print(product_name)
     price = request.form['price']
     description = request.form['description']
     quantity = request.form['quantity']
@@ -29,12 +32,12 @@ def add_product():
 
     image = request.files['image']
     if image:
-        filename = image.filename
-        # image.save(os.path.join(app.config['UPLOAD_FOLDER']. filename))
-        product_path = os.path.join(product_dir, filename)
+        image_filename = image.filename
+
+    image.save(os.path.join(app.config['UPLOAD_FOLDER']. image_filename))
 
 # Creating instance for the new product
-    new_product = Product(
+    new_product = Products(
         name=product_name,
         price=price,
         description=description,
