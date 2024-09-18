@@ -49,7 +49,6 @@
         </aside>
 
         <section id="male-section" class="product-grid">
-            {% for product in products %}
             <div class="product-card">
                 <form>
                     <img src="{{ url_for('static', filename='assets/images/male/male1.jpg') }}" alt="Male Product 1">
@@ -62,16 +61,20 @@
                     <button class="add-to-cart">Add to Cart</button>
                 </form>
             </div>
-            {% endfor %}
         </section>
 
         <section id="female-section" class="product-grid">
             {% for product in products %}
             <div class="product-card">
-                <img src="{{ url_for('static', filename='assets/images/female/female1.jpg') }}" alt="Blue Dress">
-                <h4>Black Sil Shirt</h4>
-                <p>#20,000</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <form>
+                    <img src="{{ url_for('static', filename='assets/images/female/female1.jpg') }}" alt="Blue Dress">
+                    <h4>Female Shirt</h4>
+                    <p>#20,000</p>
+                    <input type="hidden" name="product_id" value="1">
+                    <input type="hidden" name="product_name" value="Black Brouges">
+                    <input type="hidden" name="price" value="50000">
+                    <button class="add-to-cart">Add to Cart</button>
+                </form>
             </div>
             {% endfor %}
         </section>
