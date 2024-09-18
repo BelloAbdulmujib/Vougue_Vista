@@ -24,8 +24,8 @@ def search():
 @shop_bp.route('/products')
 def products():
     """ Handlesl the shopping/product page """
-    product = Products.query.all() # Fetches all the product from the database
-    return render_template('product.html')
+    all_product = Products.query.all() # Fetches all the product from the database
+    return render_template('shop.html', all_product=all_product)
 
 
 @shop_bp.route('/add_to_cart/int:product_id', methods=['POST'])
@@ -34,7 +34,7 @@ def add_to_cart():
     product = Products.query.get_or_404(product_id)
 
     if product.quantity > 0:
-        cart.append(product)
+        # cart.append(product)
         product.quantity -= 1 # Reduce product quantity by 1 after orderd
         db.session.commit()
         flash('product added to cart!', 'success')

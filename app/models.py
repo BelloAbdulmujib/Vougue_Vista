@@ -69,3 +69,26 @@ class Orders(db.Model):
 
     def __repr__(self):
         return f'<Orders{self.name}>'
+
+# Defines the cart model
+class Cart(db.Model):
+    """ Stores the ordered products """
+    id = db.Column(db.Integer, primary_key=True)
+    total_price = db.Column(db.Numeric(10, 2), default=0.00)
+    items = db.relationship('CartItem', backref='cart', cascade="all, delete-orphan", lazy=True)
+
+    def __repr__(self):
+        return f'<Cart{self.id}>'
+
+class CartItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id', ondelete="CASCADE"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    quantity = db.Column(db.Integer, default=1)
+    unit_price = db.Column(db.Numeric(10, 2), nullable=False)
+    total_price = db.Column(db.Numeric(10, 2), nullable=False)  # quantity * unit_price
+
+    def __repr__(self):
+        return f'<CartItem {self.id}, Product {self.product_id}>'
+
+
