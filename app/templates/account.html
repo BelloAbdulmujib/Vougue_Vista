@@ -4,44 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account - Vougue Vista</title>
-	<link rel="stylesheet" href="../styles/auth.css">
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
-    <script defer src="../js/toggleForms.js"></script> 
+    <link rel="stylesheet" href="../static/Styles/style.css">
+    <link rel="stylesheet" href="../static/Styles/auth.css">
+    <link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon"> 
 </head>
 <body>
     <div class="auth-container">
         <div class="auth-box">
-			<img src="../assets/logo.png" alt="Vougue Vista Logo">
+            <img src="../static/assets/Logo.png" alt="Vougue Vista Logo">
             <h1>Welcome to Vougue Vista</h1>
             <p id="form-message">Type your e-mail or phone number and password to log in or create a Vougue account.</p>
 
-            <!-- Login Form -->
-            <form id="login-form" action="/login" method="post">
-                <label for="login-email">Email or Phone Number:</label>
-                <input type="text" id="login-email" name="login-email" required>
-
-                <label for="login-password">Password:</label>
-                <input type="password" id="login-password" name="login-password" required>
-
-                <button type="submit">Login</button>
-            </form>
-
-            <!-- Signup Form (Initially Hidden) -->
-            <form id="signup-form" action="/signup" method="post" style="display: none;">
-                <label for="signup-email">Email or Phone Number:</label>
-                <input type="text" id="signup-email" name="signup-email" required>
-
-                <label for="signup-password">Password:</label>
-                <input type="password" id="signup-password" name="signup-password" required>
-
-                <button type="submit">Sign Up</button>
-            </form>
-
-            <!-- Toggle between Login/Signup -->
+            <!-- Toggle Links -->
             <div class="toggle-link">
-                <p id="toggle-text">Don't have an account? <a href="#" id="toggle-link" onclick="toggleForms()">Sign Up</a></p>
+                <p><a href="#login-section">Login</a> | <a href="#signup-section">Sign Up</a></p>
             </div>
+
+            <!-- Login Form -->
+            <section id="login-section">
+                <h2>Login</h2>
+                <form action="/login" method="post">
+                    <label for="login-email">Email or Phone Number:</label>
+                    <input type="text" id="login-email" name="login-email" required>
+
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="login-password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+            </section>
+
+            <!-- Signup Form -->
+            <section id="signup-section" style="display: none;">
+                <h2>Sign Up</h2>
+                <form action="/signup" method="post">
+                    <label for="signup-email">Email or Phone Number:</label>
+                    <input type="text" id="signup-email" name="signup-email" required>
+
+                    <label for="signup-password">Password:</label>
+                    <input type="password" id="signup-password" name="signup-password" required>
+
+                    <button type="submit">Sign Up</button>
+                </form>
+            </section>
+
         </div>
     </div>
 </body>

@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Vougue Vista</title>
-    <link rel="stylesheet" href="../styles/styles.css">
-	<link rel="stylesheet" href="../styles/admin.css">
-	<link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/styles/styles.css">
+    <link rel="stylesheet" href="../static/styles/admin.css">
+    <link rel="icon" href="../static/assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <div class="admin-container">
@@ -21,22 +21,157 @@
                 </ul>
             </nav>
         </header>
+
+        <!-- Manage Products Section -->
         <section id="products" class="admin-section">
             <h2>Manage Products</h2>
-            <!-- Add functionality for adding, updating, and deleting products -->
+            
+            <!-- Add Product Form -->
+            <h3>Add New Product</h3>
+            <form action="/add-product" method="POST">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+
+                <label for="productPrice">Price:</label>
+                <input type="text" id="productPrice" name="productPrice" required>
+
+                <label for="productImage">Image URL:</label>
+                <input type="text" id="productImage" name="productImage" required>
+
+                <label for="productDescription">Description:</label>
+                <textarea id="productDescription" name="productDescription" required></textarea>
+
+                <button type="submit">Add Product</button>
+            </form>
+
+            <!-- Update Product Form -->
+            <h3>Update Product</h3>
+            <form action="/update-product" method="POST">
+                <label for="updateProductId">Product ID:</label>
+                <input type="text" id="updateProductId" name="productId" required>
+
+                <label for="updateProductName">Product Name:</label>
+                <input type="text" id="updateProductName" name="productName">
+
+                <label for="updateProductPrice">Price:</label>
+                <input type="text" id="updateProductPrice" name="productPrice">
+
+                <label for="updateProductImage">Image URL:</label>
+                <input type="text" id="updateProductImage" name="productImage">
+
+                <label for="updateProductDescription">Description:</label>
+                <textarea id="updateProductDescription" name="productDescription"></textarea>
+
+                <button type="submit">Update Product</button>
+            </form>
+
+            <!-- Delete Product Form -->
+            <h3>Delete Product</h3>
+            <form action="/delete-product" method="POST">
+                <label for="deleteProductId">Product ID:</label>
+                <input type="text" id="deleteProductId" name="productId" required>
+
+                <button type="submit">Delete Product</button>
+            </form>
         </section>
+
+        <!-- Manage Orders Section -->
         <section id="orders" class="admin-section">
             <h2>Manage Orders</h2>
-            <!-- Add functionality for managing customer orders -->
+
+            <!-- View Order Form -->
+            <h3>View Order</h3>
+            <form action="/view-order" method="GET">
+                <label for="viewOrderId">Order ID:</label>
+                <input type="text" id="viewOrderId" name="orderId" required>
+                <button type="submit">View Order</button>
+            </form>
+
+            <!-- Update Order Status Form -->
+            <h3>Update Order Status</h3>
+            <form action="/update-order" method="POST">
+                <label for="updateOrderId">Order ID:</label>
+                <input type="text" id="updateOrderId" name="orderId" required>
+
+                <label for="orderStatus">Status:</label>
+                <select id="orderStatus" name="status">
+                    <option value="pending">Pending</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="canceled">Canceled</option>
+                </select>
+
+                <button type="submit">Update Status</button>
+            </form>
+
+            <!-- Delete Order Form -->
+            <h3>Delete Order</h3>
+            <form action="/delete-order" method="POST">
+                <label for="deleteOrderId">Order ID:</label>
+                <input type="text" id="deleteOrderId" name="orderId" required>
+                <button type="submit">Delete Order</button>
+            </form>
         </section>
+
+        <!-- Manage Users Section -->
         <section id="users" class="admin-section">
             <h2>Manage Users</h2>
-            <!-- Add functionality for viewing and managing registered users -->
+
+            <!-- View User Form -->
+            <h3>View User</h3>
+            <form action="/view-user" method="GET">
+                <label for="viewUserId">User ID:</label>
+                <input type="text" id="viewUserId" name="userId" required>
+                <button type="submit">View User</button>
+            </form>
+
+            <!-- Update User Form -->
+            <h3>Update User</h3>
+            <form action="/update-user" method="POST">
+                <label for="updateUserId">User ID:</label>
+                <input type="text" id="updateUserId" name="userId" required>
+
+                <label for="updateUserName">Username:</label>
+                <input type="text" id="updateUserName" name="userName">
+
+                <label for="updateUserEmail">Email:</label>
+                <input type="email" id="updateUserEmail" name="email">
+
+                <button type="submit">Update User</button>
+            </form>
+
+            <!-- Delete User Form -->
+            <h3>Delete User</h3>
+            <form action="/delete-user" method="POST">
+                <label for="deleteUserId">User ID:</label>
+                <input type="text" id="deleteUserId" name="userId" required>
+                <button type="submit">Delete User</button>
+            </form>
         </section>
+
+        <!-- View Reports Section -->
         <section id="reports" class="admin-section">
             <h2>View Reports</h2>
-            <!-- Add functionality for viewing sales, inventory, and other reports -->
+
+            <!-- Sales Report Form -->
+            <h3>View Sales Report</h3>
+            <form action="/view-sales-report" method="GET">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required>
+
+                <button type="submit">View Report</button>
+            </form>
+
+            <!-- Inventory Report Form -->
+            <h3>View Inventory Report</h3>
+            <form action="/view-inventory-report" method="GET">
+                <button type="submit">View Inventory Report</button>
+            </form>
         </section>
+
     </div>
 </body>
 </html>
