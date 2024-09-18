@@ -51,7 +51,7 @@ class Products(db.Model):
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=0)
-    image = db.Column(db.String(100), nullable=False)
+    file_path = db.Column(db.String(100), nullable=False)
        
     def __repr__(self):
         return f'<Products{self.name}>'
@@ -65,7 +65,7 @@ class Orders(db.Model):
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    image = db.Column(db.String(100), nullable=False)
+    file_path = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
         return f'<Orders{self.name}>'

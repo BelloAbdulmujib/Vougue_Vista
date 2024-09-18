@@ -1,8 +1,9 @@
 from flask import Flask, Blueprint, render_template, request, url_for, redirect, flash, current_app
 from flask_sqlalchemy import SQLAlchemy
 from app.models import Products
-from app import db
+from extensions import db
 import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -17,6 +18,7 @@ def admin():
 @admin_bp.route('/admin/add_product', methods=['POST'])
 def add_product():
     """ Handles the route for updating/adding a product """
+
     product_dir = current_app.config['UPLOAD_FOLDER']
     if not os.path.exists(product_dir):
         os.makedirs(product_dir)
@@ -27,7 +29,6 @@ def add_product():
     quantity = request.form['quantity']
 
     # Handles the file upload
-
     image = request.files['image']
     if image:
         image_filename = image.filename
@@ -40,10 +41,10 @@ def add_product():
         price=price,
         description=description,
         quantity=quantity,
-        image=image_filename
+        image=file_path
     )
 
-    # Adding the new products to the database
+    # Adding thproducts to the database
     db.session.add(new_product)
     db.session.commit()
 
