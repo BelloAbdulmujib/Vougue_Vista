@@ -25,7 +25,7 @@ def search():
 def products():
     """ Handlesl the shopping/product page """
     product = Products.query.all() # Fetches all the product from the database
-    return render_template('product.html')
+    return render_template('shop.html')
 
 
 @shop_bp.route('/add_to_cart/int:product_id', methods=['POST'])
