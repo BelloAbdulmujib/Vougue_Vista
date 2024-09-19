@@ -30,10 +30,10 @@
                     <a href="/login">Account</a>
                 </div>
                 <div class="cart">
-                    <a href="{{ url_for('shop.add_to_cart') }}">
+                    <a href="{{ url_for('shop.cart') }}">
                         <img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart">
                         <span>Cart</span>
-                    </a>
+                    </a>J
                 </div>
             </div>
         </nav>
@@ -48,26 +48,13 @@
             </ul>
         </aside>
 
-        <section id="male-section" class="product-grid">
-            <div class="product-card">
-                <form>
-                    <img src="{{ url_for('static', filename='assets/images/male/male1.jpg') }}" alt="Male Product 1">
-                    <h4>Black Brouges</h4>
-                    <p>#50,000</p>
-                    <!-- Hidden inputs to pass product details -->
-                    <input type="hidden" name="product_id" value="1">
-                    <input type="hidden" name="product_name" value="Black Brouges">
-                    <input type="hidden" name="price" value="50000">
-                    <button class="add-to-cart">Add to Cart</button>
-                </form>
-            </div>
-        </section>
+
 
         <section id="female-section" class="product-grid">
             {% for product in all_product %}
             <div class="product-card">
-                <form action="{{ url_for('add_to_cart', product_id=product.id) }}">
-                    <img src="{{ url_for('uploads', filename='uploads/' + product.image) }}" alt="Blue Dress">
+                <form action="{{ url_for('shop.add_to_cart', product_id=product.id) }}" method="POST">
+                    
                     <h4>{{ product.name }}</h4>
                     <p>{{ product.price }}</p>
                     <p>{{ product.image }}</p>

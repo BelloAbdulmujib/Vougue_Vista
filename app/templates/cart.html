@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Vougue Vista</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/shop.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <a id="top"></a>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='assets/Logo.png') }}" alt="Vougue Vista Logo">
+            </div>
+            <div class="store-name">Vougue Vista</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('landing.home') }}">Home</a></li>
+                <li><a href="{{ url_for('shop.products') }}">Shop</a></li>
+                <li><a href="#about-us">About Us</a></li>
+            </ul>
+            <div class="nav-right">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products...">
+                    <button type="submit">Search</button>
+                </div>
+                <div class="account">
+                    <a href="/login">Account</a>
+                </div>
+                <div class="cart">
+                    <a href="{{ url_for('shop.cart') }}">
+                        <img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart">
+                        <span>Cart</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cart">
+            <h1>Your Cart</h1>
+            {% if cart_items %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>${{ item.unit_price }}</td>
+                        <td>
+                            <form action="{{ url_for('shop.edit_cart', cart_item_id=item.id) }}" method="POST">
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                                <button type="submit">Update Quantity</button>
+                            </form>
+                        </td>
+                        <td>${{ item.unit_price * item.quantity }}</td>
+                        <td>
+                            <form action="{{ url_for('shop.delete_cart', cart_item_id=item.id) }}" method="POST">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total Price:</td>
+                        <td>${{ total_price }}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="cart-actions">
+                <a href="{{ url_for('shop.checkout') }}" class="btn-checkout">Order Now</a>
+            </div>
+            {% else %}
+            <p>Your cart is empty.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Vougue Vista. All rights reserved.</p>
+    </footer>
+</body>
+</html>

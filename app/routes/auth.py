@@ -30,7 +30,7 @@ def login():
             login_user(user)
             print('user logged in successfuly')
             flash('User logged in successfully!', 'success')
-            return redirect(url_for('home'))  #
+            return redirect(url_for('landing.home'))  #
 
         # If the admin exists and the password is correct
         # elif admin and admin.check_password(password):
