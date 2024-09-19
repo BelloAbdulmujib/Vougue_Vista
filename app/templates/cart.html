@@ -80,7 +80,9 @@
                 </tfoot>
             </table>
             <div class="cart-actions">
-                <a href="{{ url_for('shop.checkout') }}" class="btn-checkout">Order Now</a>
+                <form action="{{ url_for('shop.checkout') }}" method="POST">
+                    <button type="submit" class="btn-checkout">Cash on Delivery</button>
+                </form>
             </div>
             {% else %}
             <p>Your cart is empty.</p>
