@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/admin.css') }}"/>
     <link rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" type="image/x-icon">
-    <style>
-        /* CSS styling will be here */
-    </style>
 </head>
 <body>
+    <div class="logout">
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
     <div class="container">
         <h1>Admin Page - Manage Products</h1>
         <form action="/admin/add_product" method="POST" enctype="multipart/form-data">
