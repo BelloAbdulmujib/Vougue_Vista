@@ -2,6 +2,7 @@ from flask import Flask, Blueprint, render_template, request, url_for, redirect,
 from flask_sqlalchemy import SQLAlchemy
 from app.models import Products
 from app import db
+from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)

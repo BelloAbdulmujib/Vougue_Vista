@@ -5,7 +5,6 @@ html, body {
     height: 100%;
     box-sizing: border-box;
 }
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f5e8da; /* Light brown/nude background */
@@ -26,9 +25,16 @@ header {
 }
 
 .navbar {
+    position: fixed;
+	top: 0;
+    width: 97%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+	z-index: 1000;
+    background-color: #000; /* Black navbar background */
+    color: #fff; /* White text color */
 }
 
 .navbar .logo img {
@@ -109,7 +115,7 @@ main {
 /* Sidebar Styles */
 .sidebar {
     width: 200px; /* Fixed width for sidebar */
-    background-color: #000; /* Black background */
+    background-color: #000; /* White background */
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     margin-right: 20px; /* Space between sidebar and content */
@@ -132,7 +138,7 @@ main {
 .sidebar ul li {
     margin-bottom: 10px;
     background-color: #fff;
-    border: none;
+    border: #fff;
     border-radius: 10px;
     padding: 20px;
 }
@@ -151,10 +157,10 @@ main {
 /* Product Grid Styles */
 .product-grid {
     display: grid; /* Use grid layout */
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
-    gap: 30px; /* Increased space between cards */
-    margin: 0 auto;
-    padding: 20px;
+    grid-template-columns: repeat(4, 1fr); /* 3 columns */
+    gap: 20px; /* Space between cards */
+    margin: 0;
+    padding: 0;
 }
 
 /* Product Card Styles */
@@ -164,11 +170,6 @@ main {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     text-align: center;
-    transition: transform 0.2s ease-in-out;
-}
-
-.product-card:hover {
-    transform: scale(1.05); /* Add a subtle zoom on hover */
 }
 
 .product-card img {

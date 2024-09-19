@@ -33,36 +33,36 @@
                     <a href="{{ url_for('shop.cart') }}">
                         <img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart">
                         <span>Cart</span>
-                    </a>
-                </div>
-                <div class="logout">
-                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                    </a>J
                 </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <!--<aside class="">
-            <h3>New Arrivals</h3>
-            <h4>New Arrivals</h4>
-            <-<ul>
+        <aside class="sidebar">
+            <h3>Categories</h3>
+            <ul>
                 <li><a href="#top" onclick="showSection('male-section')">Men's Clothing and Accessories</a></li>
                 <li><a href="#top" onclick="showSection('female-section')">Women's Clothing and Accessories</a></li>
             </ul>
         </aside>
-        <section id="female-section" class="product-grid"> -->
+
+
+
+        <section id="female-section" class="product-grid">
             {% for product in all_product %}
             <div class="product-card">
                 <form action="{{ url_for('shop.add_to_cart', product_id=product.id) }}" method="POST">
                     {% if product.image %}
-                    <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" style="width: 200px; height: auto;">
+                        <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" style="width: 200px; height: auto;">
                     {% else %}
                         <p>No image available for this product</p>
                     {% endif %}
                     <h4>{{ product.name }}</h4>
-                    <p>#{{ product.price }}</p>
+                    <p>{{ product.price }}</p>
                     <p>{{ product.description }}</p>
+                    <!--<p>{{ product.image }}</p>-->
                     <input type="hidden" name="product_id" value="{{ product.id }}">
                     <input type="hidden" name="product_name" value="{{ product.name }}">
                     <input type="hidden" name="price" value="{{ product.price }}">
@@ -70,7 +70,7 @@
                 </form>
             </div>
             {% endfor %}
-        <!--/section-->
+        </section>
     </main>
 
     <footer>
