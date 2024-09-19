@@ -61,7 +61,8 @@
                     {% endif %}
                     <h4>{{ product.name }}</h4>
                     <p>{{ product.price }}</p>
-                    <p>{{ product.image }}</p>
+                    <p>{{ product.description }}</p>
+                    <!--<p>{{ product.image }}</p>-->
                     <input type="hidden" name="product_id" value="{{ product.id }}">
                     <input type="hidden" name="product_name" value="{{ product.name }}">
                     <input type="hidden" name="price" value="{{ product.price }}">
