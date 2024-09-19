@@ -25,10 +25,16 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.username}>'
-    
+
     def is_active(self):
         """Override is_active for Flask-Login."""
         return self.active
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
 
 # Defines the admin model
 class Admin(db.Model):
@@ -76,3 +82,18 @@ class Orders(db.Model):
 
     def __repr__(self):
         return f'<Orders{self.name}>'
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, default=1)
+    unit_price = db.Column(db.Numeric(10, 2), nullable=False)
+    image = db.Column(db.String(100), nullable=False)
+    
+    product = db.relationship('Products', backref='cart_items')
+
+    def __repr__(self):
+        return f'<CartItem {self.id}, Product {self.product_id}>'
+
+
