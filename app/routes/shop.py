@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, request, render_template, url_for, flash, re
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 from flask_login import login_required, current_user
-from app.models import Products, Cart
+from app.models import Products, Cart, Order, OrderItem
 from app import db
 
 shop_bp = Blueprint('shop', __name__)
@@ -54,19 +54,6 @@ def add_to_cart():
     db.session.commit()
     return redirect(url_for('shop.products'))
 
-
-
-@shop_bp.route('/checkout', methods=['POST'])
-@login_required
-def checkout():
-    """ Handles the checkout after a successful order """
-    total_amount = sum(item.price for item in cart) # This calculates the total amount of the items ordered
-    
-    # Proceed with payment or clear the cart
-    cart.clear
-    flash(f'checkout successfully! The total amount of your other is ${total_amount:.2f}.', 'success')
-    return redirect(url_for('products'))
-
 @shop_bp.route('/cart')
 @login_required
 def cart():
@@ -84,7 +71,6 @@ def edit_cart(cart_item_id):
     cart_item = Cart.query.filter_by(id=cart_item_id, user_id=current_user.id).first()
 
     if cart_item:
-        # Update the quantity if the item exists in the user's cart
         if new_quantity > 0:
             cart_item.quantity = new_quantity
             db.session.commit()
@@ -104,11 +90,45 @@ def delete_cart(cart_item_id):
     cart_item = Cart.query.filter_by(id=cart_item_id, user_id=current_user.id).first()
     
     if cart_item:
-        # Remove the item from the cart
         db.session.delete(cart_item)
         db.session.commit()
         flash('Item removed from cart successfully!', 'success')
     else:
         flash('Item not found in cart.', 'error')
     
+    return redirect(url_for('shop.cart'))
+
+@shop_bp.route('/checkout', methods=['POST'])
+@login_required
+def checkout():
+    """Handles checkout and stores order in the database."""
+    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
+    total_price = sum(item.unit_price * item.quantity for item in cart_items)
+    
+    # Create a new order
+    new_order = Order(
+        user_id=current_user.id,
+        total_amount=total_price,
+        status="Cash on Delivery"
+    )
+    db.session.add(new_order)
+    db.session.commit()
+
+    # Add each cart item to the order
+    for item in cart_items:
+        order_item = OrderItem(
+            order_id=new_order.id,
+            product_id=item.product_id,
+            quantity=item.quantity,
+            unit_price=item.unit_price
+        )
+        db.session.add(order_item)
+
+    db.session.commit()
+
+    # Clear the cart after the user checks out
+    Cart.query.filter_by(user_id=current_user.id).delete()
+    db.session.commit()
+
+    flash('Order placed successfully! Your payment will be collected upon delivery.', 'success')
     return redirect(url_for('shop.cart'))

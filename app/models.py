@@ -71,17 +71,16 @@ class Products(db.Model):
     
 
 # Defines the orders model
-class Orders(db.Model):
+class Order(db.Model):
     """ Stores the ordered products """
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    image = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    total_amount = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(50), default="Cash on Delivery", nullable=False)
+    items = db.relationship('OrderItem', backref='order', lazy=True)
 
     def __repr__(self):
-        return f'<Orders{self.name}>'
+        return f"Order(id={self.id}, user_id={self.order_id}, total_amount={self.total_amount}, status={self.status}, items={self.items})"
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -96,4 +95,12 @@ class Cart(db.Model):
     def __repr__(self):
         return f'<CartItem {self.id}, Product {self.product_id}>'
 
-
+class OrderItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    unit_price = db.Column(db.Float, nullable=False)
+    
+    def __repr__(self):
+        return f"OrderItem(id={self.id}, order_id={self.order_id}, product_id={self.product_id}, quantity={self.quantity}, unit_price={self.unit_price})"
