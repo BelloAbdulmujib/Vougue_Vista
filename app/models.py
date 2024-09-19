@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from extensions import db
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from sqlalchemy import Column, String, Float
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -37,9 +39,8 @@ class User(db.Model):
         return False
 
 # Defines the admin model
-class Admin(db.Model):
-    """ This is admin class in the model """
-    id =db.Column(db.Integer, primary_key=True)
+class AdminModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
@@ -48,7 +49,7 @@ class Admin(db.Model):
         return str(self.id)
 
     def __repr__(self):
-        return f'<Admin{self.name}>'
+        return f'<Admin{self.username}>'
 
     def is_active(self):
         """Override is_active for Flask-Login."""
