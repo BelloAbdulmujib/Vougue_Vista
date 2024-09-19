@@ -11,37 +11,32 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    print("in the login route")
     """Handles the login for both users and admins."""
     form = LoginForm()
-    #if form.validate_on_submit():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
         # Check if the email exists in the User or Admin table
         user = User.query.filter_by(email=email).first()
-        
-        # uncomment later
-        # admin = Admin.query.filter_by(email=email).first()
+        admin = Admin.query.filter_by(email=email).first()
 
         # If the user exists and the password is correct
         if user and check_password_hash(user.password, password):
             login_user(user)
-            print('user logged in successfuly')
             flash('User logged in successfully!', 'success')
-            return redirect(url_for('home'))  #
+            return redirect(url_for('landing.home'))  #
 
         # If the admin exists and the password is correct
-        # elif admin and admin.check_password(password):
-        #     login_user(admin)
-        #     flash('Admin logged in successfully!', 'success')
-        #     return redirect(url_for('admin'))  # Redirect to admin dashboard
+        elif admin and check_password_hash(admin.password, password):
+            login_user(admin)
+            flash('Admin logged in successfully!', 'success')
+            return redirect(url_for('admin.admin'))  # Redirect to admin dashboard
         
         # # If the credentials are incorrect
-        # else:
-        #     flash('Invalid email or password', 'danger')
-        #     return redirect(url_for('auth.login'))
+        else:
+            flash('Invalid email or password', 'danger')
+            return redirect(url_for('auth.login'))
 
     # Render the login page if it's a GET request or after an invalid POST request
     return render_template('auth/login.html', title='Login', form=form)

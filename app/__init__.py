@@ -10,6 +10,7 @@ from app.routes.shop import shop_bp
 from app.routes.payment import payment_bp
 from app.routes.admin import admin_bp
 from app.routes.landing import landing_bp
+from app.routes.admin_data import admin_data_bp
 from flask_wtf.csrf import CSRFProtect
 import os
 
@@ -35,7 +36,7 @@ def create_app(config_class='config.Config'):
     app.register_blueprint(payment_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(landing_bp)
-    
+    app.register_blueprint(admin_data_bp)
 
     with app.app_context():
         db.create_all() 
