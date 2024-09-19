@@ -30,7 +30,7 @@
                     <a href="/login">Account</a>
                 </div>
                 <div class="cart">
-                    <a href="cart.html">
+                    <a href="{{ url_for('shop.cart') }}">
                         <img src="{{ url_for('static', filename='assets/cart-icon.png') }}" alt="Cart">
                         <span>Cart</span>
                     </a>
