@@ -28,11 +28,23 @@ def add_product():
 
     # Handles the file upload
 
-    image = request.files['image']
+    """image = request.files['image']
     if image:
         image_filename = image.filename
 
-    image.save(os.path.join(product_dir, image_filename))
+    image.save(os.path.join(product_dir, image_filename))"""
+    image = request.files['image']
+    if image:
+        image_filename = secure_filename(image.filename)  # Always secure the filename
+        image_path = os.path.join(product_dir, image_filename)  # Full path where the image will be saved
+        
+        # Save the image to the directory
+        image.save(image_path)
+        
+        # Save the relative path to the image in the database (relative to 'static')
+        image_url = f"/static/uploads/{image_filename}"
+    else:
+        image_url = None
 
 # Creating instance for the new product
     new_product = Products(
@@ -40,7 +52,7 @@ def add_product():
         price=price,
         description=description,
         quantity=quantity,
-        image=image_filename
+        image=image_url  # Save the relative path of the image
     )
 
     # Adding the new products to the database

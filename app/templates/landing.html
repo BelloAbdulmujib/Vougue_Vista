@@ -46,7 +46,7 @@
         <section class="hero">
             <h1>Your Adventure Awaits at Vougue Vista</h1>
             <p>Step into a world of endless possibilities. Discover the latest trends and find the perfect items to express your style.</p>
-            <a href="shop.html" class="btn btn-shop">Start Shopping</a>
+            <a href="{{ url_for('shop.products') }}" class="btn btn-shop">Start Shopping</a>
         </section>
 
         <!-- Product Cards Section -->
@@ -94,7 +94,7 @@
             <div class="card-caption">Women's Elegant Dress</div>
         </div>
     </div>
-    <a class="btn-shop" href="#shop">Shop Now</a>
+    <a class="btn-shop" href="{{ url_for('shop.products') }}">Shop Now</a>
 </section>
 
 		<!-- Product Slideshow Section -->
@@ -154,11 +154,6 @@
 		<!-- Footer Section -->
     <footer>
         <p>&copy; 2024 Vougue Vista. All rights reserved.</p>
-        <ul>
-            <li><a href="search_results.html">Search</a></li>
-            <li><a href="payment.html">Payment</a></li>
-            <li><a href="admin.html">Admin Dashboard</a></li>
-        </ul>
     </footer>
 </body>
 </html>
