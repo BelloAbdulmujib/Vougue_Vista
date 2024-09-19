@@ -19,7 +19,7 @@ def login():
 
         # Check if the email exists in the User or Admin table
         user = User.query.filter_by(email=email).first()
-        admin = Admin.query.filter_by(email=email).first()
+        # admin = Admin.query.filter_by(email=email).first()
 
         # If the user exists and the password is correct
         if user and check_password_hash(user.password, password):
@@ -27,11 +27,10 @@ def login():
             flash('User logged in successfully!', 'success')
             return redirect(url_for('landing.home'))  #
 
-        # If the admin exists and the password is correct
-        elif admin and check_password_hash(admin.password, password):
-            login_user(admin)
-            flash('Admin logged in successfully!', 'success')
-            return redirect(url_for('admin.admin'))  # Redirect to admin dashboard
+        # elif admin and check_password_hash(admin.password, password):
+        #     login_user(admin)
+        #     flash('Admin logged in successfully!', 'success')
+        #     return redirect(url_for('admin.admin'))
         
         # # If the credentials are incorrect
         else:
