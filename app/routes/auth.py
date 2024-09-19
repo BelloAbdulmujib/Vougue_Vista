@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, request, jsonify, render_template, url_for, redirect, flash
 from app import db
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required, current_user
 from app.form import LoginForm, SignupForm
 from app.models import User, Admin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -86,6 +86,7 @@ def signup():
 
 
 @auth_bp.route('/logout')
+@login_required
 def logout():
     """ Handles the logout """
     logout_user()
