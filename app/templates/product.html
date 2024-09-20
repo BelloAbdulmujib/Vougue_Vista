@@ -15,7 +15,7 @@
         <ul>
             {% for product in products %}
             <li>
-                <img src="{{ url_for('static', filename='uploads/' + product.image) }}" alt="{{ product.name }}" width="100">
+                <img src="{{ product.image }}" width="100">
                 <strong>{{ product.name }}</strong> - ${{ product.price }} - Quantity: {{ product.quantity }}
                 <form action="/add_to_cart/{{ product.id }}" method="POST">
                     <button type="submit">Add to Cart</button>
