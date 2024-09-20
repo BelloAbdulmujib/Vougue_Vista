@@ -13,14 +13,23 @@ from flask_wtf.csrf import CSRFProtect
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from app.admin_views import ProductAdmin
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 import os
 
 def create_app(config_class='config.Config'):
     app = Flask(__name__)
     app.config.from_object(config_class)
+    cloudinary.config(
+    cloud_name='dh0o2azwr',
+    api_key='855948188383164',
+    api_secret='2Obg-hfVq5d5DmPpsUzvq2bVJYQ'
+    )
     app.config['ALLOWED_EXTENSIONS'] = {'jpeg', 'png', 'jpg'}
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')  # The folder where the uploads will be saved
     app.config['MAX_CONTENT_LENGTH'] = 3 * 1024 * 1024 # limit upload size 3MB
+    
 
     db.init_app(app)
     login.init_app(app)
